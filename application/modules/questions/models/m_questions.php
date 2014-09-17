@@ -26,13 +26,34 @@ class M_questions extends MY_Model {
         }
     }
 
+    function gq()
+    {
+        try
+        {
+            $this->questions = $this->em->createQuery('SELECT q.questionCode, q.question,q.choices, q.answer, q.questionCategory FROM models\Entities\Questions q ORDER BY q.questionCode ASC');
+            $this->questions = $this->questions->getResult();
+            foreach ($this->questions as $key => $value) {
+            $question[][$value['questionCode']] = $value;
+        }
+
+       // echo "<pre>"; print_r($question);
+            return $question;
+        }
+        catch(exception $ex)
+        {
+            die($ex->getMessage());
+            return false;
+        }
+    }
     function getSantizedAnswer()
     {
-        $answers = $this->getAllQuestions();
+        $answers = $this->gq();
         foreach ($answers as $value) {
             $this->sanitizedanswer[$value['questionCode']] = '';
             $this->sanitizedanswer[$value['questionCode']] .= $value['answer'];
         }
+
+        // print_r($this->sanitizedanswer);die;
 
         return $this->sanitizedanswer;
     }
@@ -265,5 +286,13 @@ class M_questions extends MY_Model {
         $all_questions = $result->result_array();
         
         return $all_questions;
+    }
+
+    public function getUserAnswers($userdetails)
+    {
+       $query = $this->db->get_where('public_answers', $userdetails);
+        $result = $query->result_array();
+        return $result;
+
     }
 }

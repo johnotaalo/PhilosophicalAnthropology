@@ -115,6 +115,24 @@ class Questions extends MX_Controller
 
 	function getAnswers()
 	{
-		$this->m_questions->getSantizedAnswer();
+		$ans = $this->m_questions->gq();
+
+		$user_answers = $this->m_questions->getUserAnswers('emailaddress = "chrizota@gmail.com"');
+
+		foreach ($ans as $key => $value) {
+			if(array_key_exists($v['question_code'], $ans)){
+			foreach ($user_answers as $k => $v) {
+				if($v['question_response'] == $value[$v['question_code']]['answer'])
+				{
+					echo "True";
+				}
+				else
+				{
+					echo "false";
+				}
+			}
+		}
+		}die;
+
 	}
 }
