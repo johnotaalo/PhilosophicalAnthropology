@@ -101,7 +101,7 @@ class Registration extends MY_Model {
                     $this ->db->insert_batch('logs',$log_data);
  
                     $this->session->set_userdata($login_status);
-                    redirect('home');
+                    redirect('home/index');
                     }
                     else if($user_details['user_type'] == 'instructor')
                     {

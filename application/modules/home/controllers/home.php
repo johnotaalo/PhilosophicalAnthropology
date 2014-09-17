@@ -77,7 +77,7 @@ class Home extends MY_Controller
         $this->session->set_userdata($default);
         $data['login_status'] = 'FALSE';
         $data['login_info'] = "You seem not to be registered in our system. Please click on the register button ";
-        $this->load->view('new_home',$data);
+        $this->index();
 		}
 	}
 
