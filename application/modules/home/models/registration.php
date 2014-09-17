@@ -37,31 +37,37 @@ class Registration extends MY_Model {
         //echo $login_msg;exit;
         $user_email = $email;
             $newdata = array(
-                   'username'  => $user_name,
-                   'email'     => $user_email,
-                   'login_status' => 'TRUE',
-                   'user_data' => $user_name,
-                   'login_info' => $login_msg,
-                   'full_name' => $full_name
+               'fname' => $fname,
+               'lname' => $sname,
+               'full_name' => $fname . ' ' . $lname,
+               'username'  => $user_name,
+               'email'     => $user_email,
+               'login_status' => 'TRUE',
+               'user_data' => $user_name,
+               'login_info' => $login_msg,
+               'full_name' => $full_name
 
                );
 
         $this->session->set_userdata($newdata);
         
         }else{
-            echo "REGISTER FOR WHO?";exit;
+            echo "REGISTRATION ERROR";exit;
         };
 
-        redirect('home/index');
+        redirect('home');
         /*
         
         */
     }
-    function verification($username,$password){
-       // $username = $_POST['username'];
-       // $password = $_POST['password'];
-        // echo $username . ' ' . $password;
+
+    function verification(){
         $user_table = array();
+        $log_data = array();
+        $details_user = '';
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $password = md5($password);
         $u_table = $this->db->get('users');
 
         $results = $u_table->result_array();
@@ -69,45 +75,47 @@ class Registration extends MY_Model {
         // print_r($results); die();
  
         foreach ($results as $user_details) {
-            // print_r($user_details);
             if(($user_details['email'] == $username )|| ($user_details['user_name'] == $username))
-            {
+            {   
+                // echo $user_details['pwd'];exit;
                 if ($user_details['pwd'] == $password) {
-                    echo "SUCCESSFUL LOGIN";
+                
+                   // echo "SUCCESSFUL LOGIN";
                     if ($user_details['user_type'] == 'student') {
                        $details_user = $this->registration->getvaluesby('members',  array('user_id' => $user_details['id']));
-                       // echo"<pre>";print_r($details_user);die;
-                       $fname = $details_user[0]['fname'];
-                       $lname = $details_user[0]['sname'];
-                       $email = $details_user[0]['email'];
-                       $full_name = $fname . ' ' . $lname;
-                       // echo $full_name;die;
+                       $fname = $details_user['fname'];
+                       $lname = $details_user['lname'];
+                       $email = $details_user['email'];
                         $login_status = array(
                         'login_status' => 'TRUE',
                         'user_data' => $username,
                         'login_info' => 'Logged in as: '. $username,
                         'fname' => $fname,
                         'lname' => $lname,
-                        'full_name' => $full_name,
+                        'full_name' => $fname . ' ' . $lname,
                         'email' =>$email
                         );
+                    
+                    $log_data_ = array('user_id' => $user_details['id'] ,'user_email' => $email );
+                    array_push($log_data, $log_data_);
+                    $this ->db->insert_batch('logs',$log_data);
+ 
                     $this->session->set_userdata($login_status);
-                    redirect('home/index');
+                    redirect('home');
                     }
                     else if($user_details['user_type'] == 'instructor')
                     {
-                        $details_user = $this->registration->getvaluesby('instructors',  array('user_id' => $user_details['id']));
-                        $fname = $details_user[0]['first_name'];
-                       $lname = $details_user[0]['second_name'];
-                       $email = $details_user[0]['email'];
-                       $fullname = $fname . ' ' . $lname;
+                         $details_user = $this->registration->getvaluesby('instructors',  array('user_id' => $user_details['id']));
+                         $fname = $details_user['first_name'];
+                       $lname = $details_user['second_name'];
+                       $email = $details_user['email'];
                         $login_status = array(
                         'login_status' => 'TRUE',
                         'user_data' => $username,
                         'login_info' => 'Logged in as: '. $username,
                         'fname' => $fname,
                         'lname' => $lname,
-                        'full_name' => $fullname,
+                        'full_name' => $fname . ' ' . $lname,
                         'email' =>$email
                         );
                     $this->session->set_userdata($login_status);
@@ -115,45 +123,51 @@ class Registration extends MY_Model {
 
                          
                     }
-
-                    else if ($user_details['user_type'] == 'admin')
+                    else if($user_details['user_type'] == 'admin')
                     {
-                        $details_user = $this->registration->getvaluesby('administrators',  array('user_id' => $user_details['id']));
-                        $fname = $details_user[0]['first_name'];
-                       $lname = $details_user[0]['second_name'];
+                         $details_user = $this->registration->getvaluesby('members',  array('user_id' => $user_details['id']));
+                       //echo "<pre>";print_r($details_user); echo "</pre>";exit;
+                       $fname = $details_user[0]['fname'];
+                       $lname = $details_user[0]['sname'];
                        $email = $details_user[0]['email'];
-                       $fullname = $fname . ' ' . $lname;
-                       $login_status = array(
+                        $login_status = array(
                         'login_status' => 'TRUE',
                         'user_data' => $username,
                         'login_info' => 'Logged in as: '. $username,
                         'fname' => $fname,
                         'lname' => $lname,
-                        'full_name' => $fullname,
                         'email' =>$email
                         );
+
+                    $log_data_ = array('user_id' => $user_details['id'] ,'user_email' => $email );
+                    array_push($log_data, $log_data_);
+                    $this ->db->insert_batch('logs',$log_data);
+
+
                     $this->session->set_userdata($login_status);
-                    redirect('admin');
-
+                    redirect('admin/index');
                     }
 
-                    else
-                    {
-                        echo "There is a problem with Logging In";
-                    }
                 }
                 else {
-                    echo "PASSWORD WRONG";
+                    return "VERIFICATION_ERROR";
                     break;
                 }
             }
-            else
-            {
-                echo "Error during Login";
-            }
+            else {
+                    return "UNREGISTERED";
+                    break;
+                }
         //echo "<pre>";print_r($user_details);echo "</pre>";
            
-        }//die;
+        }
+    }//end of verification
+
+    function data_collection(){
+        $collected_data = array();
+        $collected_data['total_members'] = $this-> db -> count_all('members');
+        $collected_data['total_instructors'] = $this -> db -> count_all('instructors');
+        return $collected_data;
     }
 
 }

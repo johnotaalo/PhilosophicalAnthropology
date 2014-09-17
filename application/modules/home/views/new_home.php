@@ -1,3 +1,9 @@
+<?php 
+// echo "<pre>";print_r($this->session->all_userdata());echo "</pre>";
+// echo "<pre> Extra: ";print_r($this->session->userdata('user_data'));echo "</pre>";
+// exit;
+ ?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
@@ -9,7 +15,7 @@
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>Brushed | Responsive One Page Template</title>   
+<title>Philosophical Anthropology|Human Sexuality and Freedom</title>   
 
 <meta name="description" content="Insert Your Site Description" /> 
 
@@ -36,6 +42,7 @@
 
 <!-- Font Icons -->
 <link href="<?php echo base_url() . 'assets/_include/css/fonts.css'?>" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/animate.css">
 
 <!-- Shortcodes -->
 <link href="<?php echo base_url() . 'assets/_include/css/shortcodes.css'?>" rel="stylesheet">
@@ -115,17 +122,28 @@
     	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-        	<a id="goUp" href="#home-slider" title="Brushed | Responsive One Page Template">Brushed Template</a>
+        	<a id="goUp" href="#home-slider" title="Home | Human Sexuality and Freedom">Homepage</a>
         </div>
         
         <nav id="menu">
         	<ul id="menu-nav">
             	<li class="current"><a href="#home-slider">Home</a></li>
-                <li><a href="#work">Our Work</a></li>
+                <li><a href="#work">Content</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact</a></li>
-				<li><a href="shortcodes.html" class="external">Shortcodes</a></li>
+				<!-- <li><a href="shortcodes.html" class="external">Shortcodes</a></li> -->
+
             </ul>
+            <div class="align_right">
+            <?php 
+                if (($this->session->userdata('user_data') != null)) {
+                    echo '<p>You are logged in as: '.$this->session->userdata('user_data').' <a href="home/logout"> Logout </a> </p>';
+                }else{
+                    echo '<p>You are not logged in. <a id="login_show"> Login/Register </a></p>';
+                }
+             ?>
+               
+            </div>
         </nav>
         
     </div>
@@ -134,13 +152,27 @@
 
 <!-- Our Work Section -->
 <div id="work" class="page">
-	<div class="container">
+        
+<div>
+        <?php
+        $attr = array('id'=>'login_form' ,'class'=>'animated display-none');
+         echo form_open('home/login',$attr); ?>
+            <input type="text" name="username" placeholder="Username/Email"> 
+            <input type="password" name="password" placeholder = "Password">
+            
+       <div id="login">
+             <button class="submit" id="login-submit" type="submit">Login</button>
+             <!-- <button class = "btn btn-default login_submit" id="member_register" type="button" data-toggle="modal" data-target="#myModal">Register</button> -->
+        </div>
+             <a class="clear" id="member_register" href="<?php echo base_url();?>home/reg_home">Not a Member? Register here</a>
+        <?php echo form_close();?>
+</div>
     	<!-- Title Page -->
         <div class="row">
             <div class="span12">
                 <div class="title-page">
-                    <h2 class="title">Our Work</h2>
-                    <h3 class="title-description">Check Out Our Projects on <a href="#">Dribbble</a>.</h3>
+                    <h2 class="title">Philosophical Anthropology</h2>
+                    <h3 class="title-description">Human Sexuality and Freedom.</h3>
                 </div>
             </div>
         </div>
@@ -152,11 +184,11 @@
             	<!-- Filter -->
                 <nav id="options" class="work-nav">
                     <ul id="filters" class="option-set" data-option-key="filter">
-                    	<li class="type-work">Type of Work</li>
-                        <li><a href="#filter" data-option-value="*" class="selected">All Projects</a></li>
-                        <li><a href="#filter" data-option-value=".design">Design</a></li>
-                        <li><a href="#filter" data-option-value=".photography">Photography</a></li>
-                        <li><a href="#filter" data-option-value=".video">Video</a></li>
+                    	<li class="type-work">Welcome</li>
+                        <li><a href="#filter" data-option-value="*" class="selected">Everything</a></li>
+                        <li><a href="#filter" data-option-value=".content">Content</a></li>
+                        <li><a href="#filter" data-option-value=".downloads">Downloads</a></li>
+                        <li><a href="#filter" data-option-value=".video">Videos</a></li>
                     </ul>
                 </nav>
                 <!-- End Filter -->
@@ -168,33 +200,22 @@
                     	<ul id="thumbs">
                         
 							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 design">
+                        	<li class="item-thumbs span3 video">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The City" href="_include/img/work/full/image-01-full.jpg">
-                                	<span class="overlay-img"></span>
+                            	<a class="hover-wrap" data-fancybox-group="gallery" title="Videos" href="videos/index">
+                                    <span class="overlay-img"></span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="<?php echo base_url() ?>assets/_include/img/work/thumbs/image-01.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="<?php echo base_url() ?>assets/_include/img/work/thumbs/image-01.png" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
+                        
                             
 							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 design">
+                        	<li class="item-thumbs span3 content">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Office" href="_include/img/work/full/image-02-full.jpg">
-                                	<span class="overlay-img"></span>
-                                    <span class="overlay-img-thumb font-icon-plus"></span>
-                                </a>
-                                <!-- Thumb Image and Description -->
-                                <img src="<?php echo base_url() ?>assets/_include/img/work/thumbs/image-02.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                            </li>
-                        	<!-- End Item Project -->
-                            
-							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 photography">
-                            	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Mountains" href="_include/img/work/full/image-03-full.jpg">
+                            	<a class="hover-wrap" data-fancybox-group="gallery" title="Human Sexuality" href="<?php echo base_url() ?>content/human_sexuality">
                                 	<span class="overlay-img"></span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
@@ -204,21 +225,9 @@
                         	<!-- End Item Project -->
                             
 							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 video">
-                            	<!-- Fancybox Media - Gallery Enabled - Title - Link to Video -->
-                            	<a class="hover-wrap fancybox-media" data-fancybox-group="video" title="Video Content From Vimeo" href="http://vimeo.com/51460511">
-                                	<span class="overlay-img"></span>
-                                    <span class="overlay-img-thumb font-icon-plus"></span>
-                                </a>
-                                <!-- Thumb Image and Description -->
-                                <img src="<?php echo base_url() ?>assets/_include/img/work/thumbs/image-08.jpg" alt="Video">
-                            </li>
-                        	<!-- End Item Project -->
-                            
-							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 photography">
+                        	<li class="item-thumbs span3 content">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Sea" href="_include/img/work/full/image-04-full.jpg">
+                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Human Freedom" href="<?php echo base_url() ?>content/human_freedom">
                                 	<span class="overlay-img"></span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
@@ -226,35 +235,13 @@
                                 <img src="<?php echo base_url() ?>assets/_include/img/work/thumbs/image-04.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
-                            
+                                                        
 							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 photography">
+
+							<!-- Item Project and Filter Name -->
+                        	<li class="item-thumbs span3 downloads">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Clouds" href="_include/img/work/full/image-05-full.jpg">
-                                	<span class="overlay-img"></span>
-                                    <span class="overlay-img-thumb font-icon-plus"></span>
-                                </a>
-                                <!-- Thumb Image and Description -->
-                                <img src="<?php echo base_url() ?>assets/_include/img/work/thumbs/image-05.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                            </li>
-                        	<!-- End Item Project -->
-                            
-							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 video">
-                            	<!-- Fancybox Media - Gallery Enabled - Title - Link to Video -->
-                            	<a class="hover-wrap fancybox-media" data-fancybox-group="video" title="Video Content From Vimeo" href="http://vimeo.com/50834315">
-                                	<span class="overlay-img"></span>
-                                    <span class="overlay-img-thumb font-icon-plus"></span>
-                                </a>
-                                <!-- Thumb Image and Description -->
-                                <img src="<?php echo base_url() ?>assets/_include/img/work/thumbs/image-09.jpg" alt="Video">
-                            </li>
-                        	<!-- End Item Project -->
-                            
-							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 design">
-                            	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="_include/img/work/full/image-06-full.jpg">
+                            	<a class="hover-wrap"  title="Download Videos" data-fancybox-group="gallery" href="videos/index">
                                 	<span class="overlay-img"></span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
@@ -264,9 +251,9 @@
                         	<!-- End Item Project -->
                             
 							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 design">
+                        	<li class="item-thumbs span3 downloads">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Beach" href="_include/img/work/full/image-07-full.jpg">
+                            	<a class="hover-wrap" data-fancybox-group="gallery" title="Download Notes" href="videos/index">
                                 	<span class="overlay-img"></span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
@@ -307,18 +294,18 @@
         	<div class="image-wrap">
                 <div class="hover-wrap">
                     <span class="overlay-img"></span>
-                    <span class="overlay-text-thumb">CTO/Founder</span>
+                    <span class="overlay-text-thumb">BIF II Yr Student</span>
                 </div>
-                <img src="<?php echo base_url() ?>assets/_include/img/profile/profile-01.jpg" alt="John Doe">
+                <img src="<?php echo base_url() ?>assets/_include/img/profile/profile-01.jpg" alt="John Chrispine Otaalo">
             </div>
-            <h3 class="profile-name">John Doe</h3>
-            <p class="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat <a href="#">hendrerit dictum</a>. 
-            Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-            	
+            <h3 class="profile-name">John Chrispine Otaalo</h3>
+            <p class="profile-description">
+            Having passed DBIT with a distinction,this magnanimous character played an immense role in the making of this system. He is a skilled individual with a dedication to his work and a keen eye to detail.
             <div class="social">
             	<ul class="social-icons">
                 	<li><a href="#"><i class="font-icon-social-twitter"></i></a></li>
                     <li><a href="#"><i class="font-icon-social-dribbble"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-google-plus"></i></a></li>
                     <li><a href="#"><i class="font-icon-social-facebook"></i></a></li>
                 </ul>
             </div>
@@ -330,17 +317,18 @@
         	<div class="image-wrap">
                 <div class="hover-wrap">
                     <span class="overlay-img"></span>
-                    <span class="overlay-text-thumb">Creative Director</span>
+                    <span class="overlay-text-thumb">BIF II Yr Student</span>
                 </div>
-                <img src="<?php echo base_url() ?>assets/_include/img/profile/profile-02.jpg" alt="Jane Helf">
+                <img src="<?php echo base_url() ?>assets/_include/img/profile/profile-02.jpg" alt="Karsan Richard Seth">
             </div>
-            <h3 class="profile-name">Jane Helf</h3>
-            <p class="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat <a href="#">hendrerit dictum</a>. 
-            Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-            	
+            <h3 class="profile-name">Karsan Richard Seth</h3>
+            <p class="profile-description">
+            Karsan Richard Seth is a BIF(exempt) student with precision in his work,attention to detail, a creative mind full of innovation and ideas and the capability to turn those ideas into more than just reality.
             <div class="social">
             	<ul class="social-icons">
+                    <li><a href="#"><i class="font-icon-social-facebook"></i></a></li>
                 	<li><a href="#"><i class="font-icon-social-twitter"></i></a></li>
+                    <li><a href="karsanrichard@gmail.com"><i class="font-icon-social-google-plus"></i></a></li>
                     <li><a href="#"><i class="font-icon-social-email"></i></a></li>
                 </ul>
             </div>
@@ -352,14 +340,13 @@
         	<div class="image-wrap">
                 <div class="hover-wrap">
                     <span class="overlay-img"></span>
-                    <span class="overlay-text-thumb">Lead Designer</span>
+                    <span class="overlay-text-thumb">BIF II Yr Student</span>
                 </div>
-                <img src="<?php echo base_url() ?>assets/_include/img/profile/profile-03.jpg" alt="Joshua Insanus">
+                <img src="<?php echo base_url() ?>assets/_include/img/profile/profile-03.jpg" alt="Joshua Nyeole Bakasa">
             </div>
-            <h3 class="profile-name">Joshua Insanus</h3>
-            <p class="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat <a href="#">hendrerit dictum</a>. 
-            Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-            	
+            <h3 class="profile-name">Joshua Nyeole Bakasa</h3>
+            <p class="profile-description">
+            Joshua Bakasa was a crucial part of the making of this beautiful system,he took part in the making of fundamentals in the system and knows his way with words. If code had a human entity,it would be Joshua. 
             <div class="social">
             	<ul class="social-icons">
                 	<li><a href="#"><i class="font-icon-social-twitter"></i></a></li>
@@ -377,6 +364,37 @@
 </div>
 <!-- End About Section -->
 
+<!-- Twitter Feed -->
+<div id="" class="page-alternate">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="span4 profile margin">
+            <div class="image-wrap">
+                <div class="hover-wrap align_left">
+                    <span class="overlay-img"></span>
+                    <span class="overlay-text-thumb">Catherine Dean</span>
+                </div>
+                <img src="<?php echo base_url() ?>assets/_include/img/profile/profile-03.jpg" alt="Joshua Nyeole Bakasa">
+        </div>
+            </div>
+            <h3 class="profile-name margin_left">Catherine Dean</h3>
+            <h4>Philosophical Anthropology Lecturer</h4>
+            <p class="profile-description margin_left">
+            Mrs Catherine Dean was the inspiration towards the making of this system. 
+            <div class="social">
+                <ul class="social-icons">
+                    <li><a href="#"><i class="font-icon-social-twitter"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-linkedin"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-google-plus"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-vimeo"></i></a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Twitter Feed -->
 
 <!-- Contact Section -->
 <div id="contact" class="page">
@@ -386,7 +404,7 @@
         <div class="span12">
             <div class="title-page">
                 <h2 class="title">Get in Touch</h2>
-                <h3 class="title-description">We’re currently accepting new client projects. We look forward to serving you.</h3>
+                <h3 class="title-description">We’re currently accepting new projects or ideas for such and look forward to serving you.</h3>
             </div>
         </div>
     </div>
@@ -495,6 +513,7 @@
 
 <!-- Js -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!-- jQuery Core -->
+<script src="<?php echo base_url().'assets/js/jquery.js'?>" type="text/javascript"></script>
 <script src="<?php echo base_url() . 'assets/_include/js/bootstrap.min.js'?>"></script> <!-- Bootstrap -->
 <script src="<?php echo base_url() . 'assets/_include/js/supersized.3.2.7.min.js'?>"></script> <!-- Slider -->
 <script src="<?php echo base_url() . 'assets/_include/js/waypoints.js'?>"></script> <!-- WayPoints -->
@@ -502,9 +521,10 @@
 <script src="<?php echo base_url() . 'assets/_include/js/jquery.isotope.js'?>"></script> <!-- Isotope Filter -->
 <script src="<?php echo base_url() . 'assets/_include/js/jquery.fancybox.pack.js'?>"></script> <!-- Fancybox -->
 <script src="<?php echo base_url() . 'assets/_include/js/jquery.fancybox-media.js'?>"></script> <!-- Fancybox for Media -->
-<!--<script src="<?php echo base_url() . 'assets/_include/js/jquery.tweet.js'?>"></script> <!-- Tweet -->
+<!--<script src="<?php //echo base_url() . 'assets/_include/js/jquery.tweet.js'?>"></script> <!-- Tweet -->
 <script src="<?php echo base_url() . 'assets/_include/js/plugins.js'?>"></script> <!-- Contains: jPreloader, jQuery Easing, jQuery ScrollTo, jQuery One Page Navi -->
 <script src="<?php echo base_url() . 'assets/_include/js/main.js'?>"></script> <!-- Default JS -->
+
 <!-- End Js -->
 
 </body>

@@ -6,7 +6,7 @@ var main_img = $("#main-image").height();
 
 //hiding login
 $("#tab-content").hide();
-$("#login").addClass("fadeOutUp");
+$("#login_form").addClass("fadeOutUp");
 
 $("#login_button").click(function(){
 	if ($("#login").hasClass("fadeOutUp")) {

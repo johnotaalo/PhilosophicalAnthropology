@@ -2,6 +2,21 @@ jQuery(function($){
 
 var BRUSHED = window.BRUSHED || {};
 
+// $('#login_form').hide();
+$("#login_form").addClass("fadeOutUp");
+
+$('#login_show').click(function(){
+	if ($("#login_form").hasClass("fadeOutUp")) {
+	$("#login_form").removeClass("fadeOutUp");
+	$("#login_form").removeClass("display-none");
+	$("#login_form").addClass("fadeInDown");
+
+	}else{
+	$("#login_form").removeClass("fadeInDown");	
+	$("#login_form").addClass("fadeOutUp");
+	// $("#login").hide();
+	};
+});
 /* ==================================================
    Mobile Navigation
 ================================================== */

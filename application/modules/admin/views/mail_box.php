@@ -1,8 +1,16 @@
+<?php //echo "<pre>";print_r($mail);echo "</pre>";exit; ?>
+<?php 
+//echo "<pre>";print_r($this->session->all_userdata());echo "</pre>"; echo $this->session->userdata('login_info');exit; 
+$fname = $this->session->userdata('fname');
+$names = $this->session->userdata('fname').' '.$this->session->userdata('lname');
+$email = $this->session->userdata('email');
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Admin | Members</title>
+        <title>Admin | Instructors</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>" rel="stylesheet" type="text/css" />
@@ -240,15 +248,15 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                 <span><?php echo $names; ?> <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
                                     <img src="<?php echo base_url().'assets/images/img/avatar3.png'?>" class="img-circle" alt="User Image" />
                                     <p>
-                                        Jane Doe - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                       <?php echo $names;  ?> - Site Administrator
+                                        <small>Email: <?php echo $email ?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -289,7 +297,7 @@
                             <img src="<?php echo base_url().'assets/images/img/avatar3.png'?>" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jane</p>
+                            <p>Hello, <?php echo $fname; ?></p>
 
                             <a href="#"><i class="glyphicon glyphicon-ok-circle text-success"></i> Online</a>
                         </div>
@@ -316,7 +324,7 @@
                                 <i class="fa fa-mortar-board"></i> <span>Instructors</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="<?php echo base_url(). 'admin/members'?>">
                                 <i class="fa fa-users"></i><span>Members</span>   
                             </a>
@@ -324,9 +332,12 @@
                         <li >
                             <a href="<?php echo base_url(). 'admin/users'?>">
                                 <i class="fa fa-user"></i> <span>Users</span>
+                               
                             </a>
+                            
                         </li>
-                        <li>
+                        
+                        <li class="active">
                             <a href="<?php echo base_url().'admin/mail_box' ?>">
                                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
                                 <small class="badge pull-right bg-yellow">12</small>
@@ -347,149 +358,185 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Members Details
+                        Mail Box
                         <small>Control panel</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Members</li>
+                        <li class="active">Mails</li>
                     </ol>
                 </section>
 
                 <!-- Main content -->
                 <section class="content">
 
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                                               
-                    </div><!-- /.row -->
+                    <!-- MAILBOX BEGIN -->
+                    <div class="mailbox row">
+                        <div class="col-xs-12">
+                            <div class="box box-solid">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4">
+                                            <!-- BOXES are complex enough to move the .box-header around.
+                                                 This is an example of having the box header within the box body -->
+                                            <div class="box-header">
+                                                <i class="fa fa-inbox"></i>
+                                                <h3 class="box-title">INBOX</h3>
+                                            </div>
+                                            <!-- compose message btn -->
+                                            <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i> Compose Message</a>
+                                            <!-- Navigation - folders-->
+                                            <div style="margin-top: 15px;">
+                                                <ul class="nav nav-pills nav-stacked">
+                                                    <li class="header">Folders</li>
+                                                    <li class="active"><a href="" onclick="toggle_div('errorsDiv');"><i class="fa fa-inbox"></i> Inbox (14)</a></li>
+                                                    <li><a href="#"><i class="fa fa-pencil-square-o"></i> Drafts</a></li>
+                                                    <li><a href="" onclick="toggle_div('sentDiv');"><i class="fa fa-mail-forward"></i> Sent</a></li>
+                                                    <li><a href="#"><i class="fa fa-star"></i> Starred</a></li>
+                                                    <li><a href="#"><i class="fa fa-folder"></i> Junk</a></li>
+                                                </ul>
+                                            </div>
+                                        </div><!-- /.col (LEFT) -->
+                                        <div class="col-md-9 col-sm-8" id="errorsDiv" style="display: block;">
+                                            <div class="row pad">
+                                                <div class="col-sm-6">
+                                                    <label style="margin-right: 10px;">
+                                                        <input type="checkbox" id="check-all"/>
+                                                    </label>
+                                                    <!-- Action button -->
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default btn-sm btn-flat dropdown-toggle" data-toggle="dropdown">
+                                                            Action <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Mark as read</a></li>
+                                                            <li><a href="#">Mark as unread</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="#">Move to junk</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="#">Delete</a></li>
+                                                        </ul>
+                                                    </div>
 
-                    <!-- Main row -->
-                    <div class="row">
-                        <!-- Left col -->
-                        <section class="col-lg-11 connectedSortable">                            
+                                                </div>
+                                                <div class="col-sm-6 search-form">
+                                                    <form action="#" class="text-right">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control input-sm" placeholder="Search">
+                                                            <div class="input-group-btn">
+                                                                <button type="submit" name="q" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.row -->
 
-                            <!-- Calendar -->
-                            <div class="box box-solid ">
-                                <div class="box-header">
-                                    <i class="ion ion-person-add"></i>
-                                    <h3 class="box-title">Members Information</h3>
-                                    <!-- tools box -->
-                                    <div class="pull-right box-tools">
-                                        <!-- button with a dropdown -->
-                                        
-                                        <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                
-                                    </div><!-- /. tools -->
-                                </div><!-- /.box-header -->
-                                <div class="box-body yes-padding">
-                                <?php
-                                    if ($members != null) {
-                                        
-                                ?>
-                                    <div class="table-responsive">
-                                        <table style="font-size:100%" id="" class="table table-bordered table-responsive">
-                                        <thead>
-                                            <tr>
-                                               <td rowspan="2">#</td>
-                                                <td rowspan="2">First Name</td>
-                                                <td rowspan="2">Second Name</td>
-                                                <td rowspan="2">Other Name</td>
-                                                <td rowspan="2">Email</td>
-                                                <td rowspan="2">Status</td>
-                                                <td colspan="2">Action</td>
-                                            </tr>
-                                             <tr>
-                                                <td>Deactivate</td>
-                                                <td>Edit</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                            $i=1;
-                                            foreach ($members as $value) {
-                                                // print_r($value); 
-                                                $value['id'];
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $i; ?></td>
-                                                <td><?php echo $value['fname']; ?></td>
-                                                <td><?php echo $value['sname']; ?></td>
-                                                <td><?php echo $value['onames']; ?></td>
-                                                <td><?php echo $value['email']; ?></td>
-                                            <?php
-                                                if ($value['status'] == 1) {
-                                                    $class = "glyphicon glyphicon-ok-sign";
-                                                    $color = "#34AE11";
-                                                 } else if ($value['status'] == 2) {
-                                                    $class = "glyphicon glyphicon-remove-sign";
-                                                    $color = "#F13A3A";
-                                                 }
+                                            <div class="table-responsive">
+                                                <!-- THE MESSAGES -->
+                                                <?php
+                                                    //print_r($inbox); die();
+
+                                                ?>
+                                                <table class="table table-mailbox">
+                                                <?php
+                                                    foreach ($inbox as $value) {
+                                                        
+                                                        if ($value['looked_at'] == 0) {
+                                                            $class = "unread";
+                                                        } else if ($value['looked_at'] == 1) {
+                                                            $class = "";
+                                                        }
+                                                ?>
+                                                        <tr class="<?php echo $class; ?>">
+                                                        <td class="small-col"><input type="checkbox" /></td>
+                                                        <td class="small-col"><i class="fa fa-star"></i></td>
+                                                        <td class="name"><a href="#"><?php echo $value['user_name']; ?></a></td>
+                                                        <td class="subject"><a href="#"><?php echo $value['subject'] ?></a></td>
+                                                        <td class="time"><?php echo $value['date']; ?></td>
+                                                    </tr>
+                                                <?php   
+                                                    
+                                                    }
+                                                ?>
+                                                    
+                                                </table>
+                                            </div><!-- /.table-responsive -->
+                                        </div><!-- /.col (RIGHT) -->
+
+                                        <div class="col-md-9 col-sm-8" id="sentDiv" style="display: none;">
+                                            <div class="row pad">
+                                                <div class="col-sm-6">
+                                                    <label style="margin-right: 10px;">
+                                                        <input type="checkbox" id="check-all"/>
+                                                    </label>
+                                                    <!-- Action button -->
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default btn-sm btn-flat dropdown-toggle" data-toggle="dropdown">
+                                                            Action <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Mark as read</a></li>
+                                                            <li><a href="#">Mark as unread</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="#">Move to junk</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="#">Delete</a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-6 search-form">
+                                                    <form action="#" class="text-right">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control input-sm" placeholder="Search">
+                                                            <div class="input-group-btn">
+                                                                <button type="submit" name="q" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.row -->
+
+                                            <div class="table-responsive">
+                                                <!-- THE EMAILS -->
+                                                <?php
+                                                    //print_r($inbox); die();
+
+                                                ?>
+                                                <table class="table table-mailbox">
+                                                <?php
+                                                    foreach ($mails as $value) {
+                                                       
+                                                        
+                                                ?>
+                                                        <tr class="<?php echo $class; ?>">
+                                                        <td class="small-col"><input type="checkbox" /></td>
+                                                        <td class="small-col"><i class="fa fa-star"></i></td>
+                                                        <td class="name"><a href="#"><?php echo $value['recipients']; ?></a></td>
+                                                        <td class="subject"><a href="#"><?php echo $value['subject'] ?></a></td>
+                                                        <td class="time"><?php echo $value['date']; ?></td>
+                                                    </tr>
+                                                <?php   
+                                                    
+                                                    }
+                                                ?>
                                                   
-                                            ?>
-                                                <td>
-                                                    <center>
-                                                        <span class="<?php echo $class;?>" style="color: <?php echo $color; ?>" ></span>
-                                                    </center>
-                                                </td>
-                                                <td>
-                                                    <center>
-                                                        <span class="glyphicon glyphicon-remove-sign" style="color:#F13A3A;" ></span>
-                                                    </center>
-                                                </td>
-                                                <td>
-                                                   <center>
-                                                        <a href="javascript:void(null);" onclick="edit_member(<?php echo $value['id'];?>,'<?php echo $value['fname'];?>','<?php echo $value['sname'];?>','<?php echo $value['onames'];?>','<?php echo $value['email'];?>','<?php echo $value['status'];?>')"><span class="glyphicon glyphicon-pencil" style="color: #70D3E9;"></span></a>
-                                                    </center>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                           $i++;
-                                            }
-                                        ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <?php
-                                    } else {
-                                ?>
-                                <div class="table-responsive">
-                                    <table style="font-size:100%" id="" class="table table-bordered table-responsive">
-                                        <thead>
-                                            <tr>
-                                                <td rowspan="2">#</td>
-                                                <td rowspan="2">First Name</td>
-                                                <td rowspan="2">Second Name</td>
-                                                <td rowspan="2">Other Name</td>
-                                                <td rowspan="2">Email</td>
-                                                <td rowspan="2">Status</td>
-                                                <td colspan="2">Action</td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="8">No data in this table....</td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <?php
-                                    }
-                                    
-                                ?>
-                                    
+                                                </table>
+                                            </div><!-- /.table-responsive -->
+                                        </div><!-- /.col (RIGHT) -->
+                                    </div><!-- /.row -->
                                 </div><!-- /.box-body -->
-                            </div><!-- /.box -->                            
-
-                        </section><!-- right col -->
-                        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                       
-                    </div><!-- /.row (main row) -->
+                                <div class="box-footer clearfix">
+                                    <div class="pull-right">
+                                        <small>Showing 1-12/1,240</small>
+                                        <button class="btn btn-xs btn-primary"><i class="fa fa-caret-left"></i></button>
+                                        <button class="btn btn-xs btn-primary"><i class="fa fa-caret-right"></i></button>
+                                    </div>
+                                </div><!-- box-footer -->
+                            </div><!-- /.box -->
+                        </div><!-- /.col (MAIN) -->
+                    </div>
+                    <!-- MAILBOX END -->
 
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
@@ -497,47 +544,51 @@
 
         <!-- add new calendar event modal -->
 
-        <div class="modal fade" id="editmemberdiv">
-            <div class="modal-dialog" style="width:60%;margin-bottom:2px;">
-                <div class="modal-content" >
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h5 class="modal-title">Edit Instructor</h5>
+    <div class="modal fade" id="compose-modal">
+	    <div class="modal-dialog" style="width:60%;margin-bottom:2px;">
+	        <div class="modal-content" >
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                
+	            </div>
+	            <div class="modal-body" style="padding-bottom:0px;">    
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <i class="fa fa-envelope"></i>
+                            <h3 class="box-title">Send Email</h3>
+                             <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                            </div><!-- /. tools -->
+                        </div>
+                        <form action="<?php echo base_url(). 'admin/email_details'?>" method="post">
+                            <div class="box-body">
+                                        
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="recipient" placeholder="Email to:"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject"/>
+                                </div>
+                                <div>
+                                    <textarea class="textarea" name = "message" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="box-footer clearfix">
+                                <button class="pull-right btn btn-default" id="sendEmail" type = "submit">Send <i class="fa fa-arrow-circle-right"></i></button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-body" style="padding-bottom:0px;">    
-                    <?php echo form_open(base_url().'admin/edit_instructor'); ?>
-                        <input type="hidden" id="editid" name="editid" />
-                        <div class="input-group" style="width: 100%;padding:4px;">
-                                <span class="input-group-addon" style="width: 40%;"> First Name:</span>
-                                <input id="editfname" name="editfname" class="textfield form-control" />    
-                        </div>
-                        <div class="input-group" style="width: 100%;padding:4px;">
-                                <span class="input-group-addon" style="width: 40%;"> Second Name:</span>
-                                <input id="editsname" name="editsname" class="textfield form-control" />    
-                        </div>
-                        <div class="input-group" style="width: 100%;padding:4px;">
-                                <span class="input-group-addon" style="width: 40%;"> Other Name:</span>
-                                <input id="editonames" name="editonames" class="textfield form-control" /> 
-                        </div>
-                        
-                        <div class="input-group" style="width: 100%;padding:4px;">
-                                <span class="input-group-addon" style="width: 40%;"> email:</span>
-                                <input id="editemail" name="email" class="textfield form-control" />    
-                        </div>
-                        
-                        <div class="input-group" style="width: 100%;padding:4px;">
-                            <span class="input-group-addon" style="width: 40%;"> Status :</span>
-                            <span class="input-group-addon" style="width: 30%;"><input type="radio" name="editstatus" value="1">  Active  <span style="font-size: 1.4em;color: #3e8f3e;" class="glyphicon glyphicon-ok-sign"></span></input></span>
-                            <span class="input-group-addon" style="width: 30%;"><input type="radio" name="editstatus" value="2">  Deactivate <span style="font-size: 1.4em;color: #eb9316;" class="glyphicon glyphicon-remove-sign"></span></input></span>
-                        </div>              
-                        <div class="modal-footer" style="height:11px;padding-top:11px;">
-                            <?php echo $this->config->item("copyrights");?>
-                        </div> 
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+	                <div class="modal-footer" style="height:11px;padding-top:11px;">
+	                    <?php echo $this->config->item("copyrights");?>
+	                </div> 
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+
 
 
         <!-- jQuery 2.0.2 -->
@@ -573,34 +624,6 @@
 
         <!-- Admin for demo purposes -->
         <script src="<?php echo base_url().'assets/js/admin/demo.js'?>" type="text/javascript"></script>
-
-        <script type="text/javascript">
-        function edit_member (id,fname,sname,onames,email,status) {
-            // alert(id);
-            var str = "#tr_"+id;
-
-            var row = $(str).html();
-
-            $("#edit_table_details").html(row);
-
-            $("#editid").val(id);
-            $("#editfname").val(fname);
-            $("#editsname").val(sname);
-            $("#editonames").val(onames);
-            $("#editemail").val(email);
-            
-                
-
-
-            $('input[name=editstatus][value=1]').prop('checked', false);
-            $('input[name=editstatus][value=2]').prop('checked', false);
-            
-            $('input[name=editstatus][value='+status+']').prop('checked', true);
-
-
-            $('#editmemberdiv').modal('show');
-        }
-        </script>
-
+    
     </body>
 </html>

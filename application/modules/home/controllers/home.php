@@ -54,17 +54,31 @@ class Home extends MY_Controller
         $email =  $_POST['email'];
         $user_name =  $_POST['user_name'];
         $pwd = $_POST['pwd'];
-        $pwd =  $this->my_hash($pwd);
+        $pwd =  md5($pwd);
 		
     	$this->registration->member_reg($fname,$sname,$onames,$dob,$email,$user_name,$pwd);
 	}
 
 	public function login(){
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-       	$password = $this->my_hash($password);
-
-		$result = $this->registration->verification($username,$password);
+		$result = $this->registration->verification();
+		if ($result == 'VERIFICATION_ERROR') {
+			$default = array(
+                   'login_status'  => 'FALSE'
+               );
+        $this->session->set_userdata($default);
+        $data['login_status'] = 'FALSE';
+        $data['login_info'] = "The password you entered is invalid. ";
+        $this->load->view('homepage',$data);
+		}elseif ($result == 'UNREGISTERED') {
+			$result = $this->registration->verification();
+			$default = array(
+                   'login_status'  => 'FALSE'
+               );
+        $this->session->set_userdata($default);
+        $data['login_status'] = 'FALSE';
+        $data['login_info'] = "You seem not to be registered in our system. Please click on the register button ";
+        $this->load->view('new_home',$data);
+		}
 	}
 
 	public function logout(){

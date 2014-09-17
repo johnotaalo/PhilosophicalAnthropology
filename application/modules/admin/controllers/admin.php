@@ -48,6 +48,23 @@ class Admin extends MY_Controller
 		$this->load->view('members_view', $data);
 	}
 
+	public function mail_box($value='')
+	{
+		$data['mails'] 	 = $this->admin_model->get_mails();
+		$data['inbox'] 	 = $this->admin_model->errors();
+		$data['deleted'] = $this->admin_model->deleted_errors();
+		
+		$this->load->view('mail_box', $data);
+	}
+
+	function users()
+	{
+		$data['logs'] = $this->admin_model->get_logs();
+		
+		$this->load->view('users_view', $data);
+	}
+
+	
 	public function add_instructor()
 	{
 		$default_password = $this->my_hash($this->config->item('instructors_default'));
@@ -167,8 +184,15 @@ class Admin extends MY_Controller
 		
 		return $errorlistSection;
 	}
-}
 
+
+public function logout(){
+		$this ->session->sess_destroy();
+
+			redirect("/home");
+		
+		}
+	}
 ?>
 
 

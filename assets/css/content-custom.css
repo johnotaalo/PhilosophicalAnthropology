@@ -1,3 +1,87 @@
+html, body {
+	height: 100%;
+}
+
+html, hmtl a{
+	font-size: 100%; 
+	-webkit-text-size-adjust: 100%; 
+	-ms-text-size-adjust: 100%;
+}
+
+body{
+	background:#2F3238;
+	color:#7F8289;
+	font-weight:300;
+	font-size:16px;
+	font-family: 'Titillium Web', sans-serif;
+	line-height:28px;
+	position: relative;
+	left:200px;
+	padding: 20px 0;
+}
+
+.sexuality{
+	left:250px;
+}
+
+
+a{
+	color:#DE5E60;
+	text-decoration: none;
+	cursor: pointer;
+	
+	-webkit-transition: color 0.1s linear 0s;	
+	   -moz-transition: color 0.1s linear 0s;
+		 -o-transition: color 0.1s linear 0s;
+		    transition: color 0.1s linear 0s;
+}
+
+a:hover,
+a:active,
+a:focus{
+	outline: 0;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+a img {
+	border: none;
+}
+
+a > img {
+	vertical-align: bottom;	
+}
+
+img {
+	max-width: none;	
+}
+
+strong {
+  	font-weight: 500;
+}
+
+p {
+	margin: 0 0 30px;
+}
+
+hr {
+	border-style: dashed;
+	border-color: #3C3F45;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	margin: 50px 0;	
+}
+
+.divider{
+	background-color:#6E6E6E;
+	height: 2px;
+	width: 100%;
+	margin: 5px 0;
+}
+
+
+
 /*CUSTOM FLAT UI*/
 .panel-group {
 width: 300px;
@@ -23,4 +107,10 @@ width: 300px;
 /*END OF CUSTOM FLAT UI*/
 .toggle-button{
 	top:60px;
+}
+#menu{
+	position: fixed;
+	left: 0px;
+	float: right;
+	width: auto;
 }

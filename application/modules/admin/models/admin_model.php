@@ -51,6 +51,88 @@ class Admin_model extends MY_Model
 		return $members->result_array();
 	}
 
+	public function get_mails()
+	{
+		$sql = "SELECT 
+						`recipients`,
+						`subject`,
+						`message`,
+						`date`
+				FROM
+						`mailerlog`";
+
+		$mails = $this->db->query($sql);
+
+		return $mails->result_array();
+	}
+
+	public function errors()
+	{
+		$sql = "SELECT
+						`ERR`.`subject`,
+						`ERR`.`message`,
+						`ERR`.`user_id`,
+						`ERR`.`date`,
+						`ERR`.`looked_at`,
+						`ERR`.`status`,
+						`USS`.`id`,
+						`USS`.`user_name`
+
+				FROM
+						`error_reports` AS `ERR`
+					LEFT JOIN 
+								`users` AS `USS`
+						ON 
+								`ERR`.`user_id` = `USS`.`id`
+				WHERE `ERR`.`status` = 1";
+
+		$errors = $this->db->query($sql);
+
+		return $errors->result_array();
+	}
+
+	public function deleted_errors()
+	{
+		$sql = "SELECT
+						`ERR`.`subject`,
+						`ERR`.`message`,
+						`ERR`.`user_id`,
+						`ERR`.`date`,
+						`ERR`.`looked_at`,
+						`ERR`.`status`,
+						`USS`.`id`,
+						`USS`.`user_name`
+
+				FROM
+						`error_reports` AS `ERR`
+					LEFT JOIN 
+								`users` AS `USS`
+						ON 
+								`ERR`.`user_id` = `USS`.`id`
+				WHERE `ERR`.`status` = 0";
+
+		$errors = $this->db->query($sql);
+
+		return $errors->result_array();
+	}
+
+	public function get_logs()
+	{
+		$sql = "SELECT
+						`logs`.`user_id`,
+						`logs`.`user_email`,
+						`logs`.`logged_in_at`,
+						`users`.`user_name`,
+						`users`.`user_type`,
+						`users`.`id`
+					FROM `logs`
+						LEFT JOIN `users`
+							ON `logs`.`user_id` = `users`.`id`";
+		$logs = $this->db->query($sql);
+
+		return $logs->result_array();
+	}
+
 	public function add_Instructors($default_password)
 	{
 		

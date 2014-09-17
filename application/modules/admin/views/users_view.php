@@ -1,14 +1,8 @@
-<?php 
-//echo "<pre>";print_r($this->session->all_userdata());echo "</pre>"; echo $this->session->userdata('login_info');exit; 
-$fname = $this->session->userdata('fname');
-$names = $this->session->userdata('fname').' '.$this->session->userdata('lname');
-$email = $this->session->userdata('email');
-?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Admin | Dashboard</title>
+        <title>Admin | Users</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>" rel="stylesheet" type="text/css" />
@@ -58,14 +52,73 @@ $email = $this->session->userdata('email');
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-envelope"></i>
-                                <span class="label label-success"><?php echo $no_errors; ?></span>
+                                <span class="label label-success">4</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">You have <?php echo $no_errors; ?> messages</li>
+                                <li class="header">You have 4 messages</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
-                                        <?php echo $errorlistsection; ?>
+                                        <li><!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="<?php echo base_url().'assets/images/img/avatar3.png'?>" class="img-circle" alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    Support Team
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li><!-- end message -->
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="<?php echo base_url().'assets/images/img/avatar2.png'?>" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    AdminLTE Design Team
+                                                    <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="img/avatar.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    Developers
+                                                    <small><i class="fa fa-clock-o"></i> Today</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="img/avatar2.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    Sales Department
+                                                    <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="img/avatar.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    Reviewers
+                                                    <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="footer"><a href="#">See All Messages</a></li>
@@ -75,14 +128,39 @@ $email = $this->session->userdata('email');
                         <li class="dropdown notifications-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-warning-sign"></i>
-                                <span class="label label-warning"><?php echo $no_errors; ?></span>
+                                <span class="label label-warning">10</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">You have <?php echo $no_errors; ?> notifications</li>
+                                <li class="header">You have 10 notifications</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
-                                       <?php echo $errorlistsection; ?>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ion ion-ios7-people info"></i> 5 new members joined today
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users warning"></i> 5 new members joined
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <i class="ion ion-ios7-cart success"></i> 25 sales made
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ion ion-ios7-person danger"></i> You changed your username
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="footer"><a href="#">View all</a></li>
@@ -162,15 +240,15 @@ $email = $this->session->userdata('email');
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span><?php echo $names; ?> <i class="caret"></i></span>
+                                <span>Jane Doe <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
                                     <img src="<?php echo base_url().'assets/images/img/avatar3.png'?>" class="img-circle" alt="User Image" />
                                     <p>
-                                        <?php echo $names;  ?> - Site Administrator
-                                        <small>Email: <?php echo $email ?></small>
+                                        Jane Doe - Web Developer
+                                        <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -191,7 +269,7 @@ $email = $this->session->userdata('email');
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="admin/logout" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -211,7 +289,7 @@ $email = $this->session->userdata('email');
                             <img src="<?php echo base_url().'assets/images/img/avatar3.png'?>" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, <?php echo $fname; ?></p>
+                            <p>Hello, Jane</p>
 
                             <a href="#"><i class="glyphicon glyphicon-ok-circle text-success"></i> Online</a>
                         </div>
@@ -228,7 +306,7 @@ $email = $this->session->userdata('email');
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="active">
+                        <li >
                             <a href="<?php echo base_url(). 'admin'?>">
                                 <i class="fa fa-tachometer"></i> <span>Home</span>
                             </a>
@@ -243,15 +321,18 @@ $email = $this->session->userdata('email');
                                 <i class="fa fa-users"></i><span>Members</span>   
                             </a>
                         </li>
-                        <li class="treeview">
-                            <a href="#">
+                        <li  class="active">
+                            <a href="<?php echo base_url(). 'admin/users'?>">
                                 <i class="fa fa-user"></i> <span>Users</span>
+                               
                             </a>
+                            
                         </li>
+                        
                         <li>
                             <a href="<?php echo base_url().'admin/mail_box' ?>">
                                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                                <small class="badge pull-right bg-yellow"><?php echo $no_errors; ?></small>
+                                <small class="badge pull-right bg-yellow">12</small>
                             </a>
                         </li>
                         <li>
@@ -269,12 +350,12 @@ $email = $this->session->userdata('email');
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
+                        Instructors` Details
                         <small>Control panel</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
+                        <li class="active">Instructors</li>
                     </ol>
                 </section>
 
@@ -283,150 +364,98 @@ $email = $this->session->userdata('email');
 
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>
-                                        <?php echo $no_members; ?>
-                                    </h3>
-                                    <p>
-                                        Members
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-stalker"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-green">
-                                <div class="inner">
-                                    <h3>
-                                        <?php echo $no_instructors; ?>
-                                    </h3>
-                                    <p>
-                                        Instructors
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-mortar-board"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-yellow">
-                                <div class="inner">
-                                    <h3>
-                                        <?php echo $no_users; ?>
-                                    </h3>
-                                    <p>
-                                        Users
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-red">
-                                <div class="inner">
-                                    <h3>
-                                        <?php echo $no_questions; ?>
-                                    </h3>
-                                    <p>
-                                        Questions
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
+                                               
                     </div><!-- /.row -->
 
                     <!-- Main row -->
                     <div class="row">
                         <!-- Left col -->
-                        <section class="col-lg-7 connectedSortable">                                                      
-
-                            <!-- quick email widget -->
-                            <div class="box box-info">
-                                <div class="box-header">
-                                    <i class="fa fa-envelope"></i>
-                                    <h3 class="box-title">Quick Email</h3>
-                                    <!-- tools box -->
-                                    <div class="pull-right box-tools">
-                                        <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-                                    </div><!-- /. tools -->
-                                </div>
-                                <form action="<?php echo base_url(). 'admin/email_details'?>" method="post">
-                                    <div class="box-body">
-                                        
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" name="recipient" placeholder="Email to:"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="subject" placeholder="Subject"/>
-                                            </div>
-                                            <div>
-                                                <textarea class="textarea" name = "message" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                            </div>
-                                    </div>
-                                    <div class="box-footer clearfix">
-                                        <button class="pull-right btn btn-default" id="sendEmail" type = "submit">Send <i class="fa fa-arrow-circle-right"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </section><!-- /.Left col -->
-                        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                        <section class="col-lg-5 connectedSortable">                            
+                        <section class="col-lg-11 connectedSortable">                            
 
                             <!-- Calendar -->
-                            <div class="box box-solid bg-green-gradient">
+                            <div class="box box-solid ">
                                 <div class="box-header">
-                                    <i class="fa fa-calendar"></i>
-                                    <h3 class="box-title">Calendar</h3>
+                                    <i class="ion ion-person-add"></i>
+                                    <h3 class="box-title">Instructors Information</h3>
                                     <!-- tools box -->
                                     <div class="pull-right box-tools">
                                         <!-- button with a dropdown -->
-                                        <div class="btn-group">
-                                            <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                                            <ul class="dropdown-menu pull-right" role="menu">
-                                                <li><a href="#">Add new event</a></li>
-                                                <li><a href="#">Clear events</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#">View calendar</a></li>
-                                            </ul>
-                                        </div>
+                                        
                                         <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>                                        
+                                                                                
                                     </div><!-- /. tools -->
                                 </div><!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <!--The calendar -->
-                                    <div id="calendar" style="width: 100%"></div>
+                                <div class="box-body yes-padding">
+                                <?php 
+                                    // print_r($instructors); die();
+
+                                    if ($logs != NULL) {
+                                ?>
+                                    <div class="table-responsive">
+                                        <table style="font-size:90%" id="" class="table table-bordered table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <td rowspan="2"><center>#</center></td>
+                                                    <td rowspan="2"><center>Username</center></td>
+                                                    <td rowspan="2"><center>Users Email</center></td>
+                                                    <td rowspan="2"><center>Type of user</center></td>
+                                                    <td rowspan="2"><center>Time of Logging In</center></td>
+                                                  
+                                                </tr>
+                                                
+                                            </thead>
+                                            <tbody class="">
+                                                <?php
+                                                    $i=1;
+                                                    // print_r($instructors); die();
+                                                    foreach ($logs as $values) {
+                                                ?>  
+                                                    <tr>
+                                                        <td><?php echo $i; ?></td>
+                                                        <td><?php echo $values['user_name']; ?></td>
+                                                        <td><?php echo $values['user_email']; ?></td>
+                                                        <td><?php echo $values['user_type']; ?></td>
+                                                        <td><?php echo $values['logged_in_at']; ?></td>
+                                                        
+                                                        
+                                                    </tr>   
+                                                <?php
+                                                    $i++;
+                                                    }
+                                                ?>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?php 
+                                    } else {
+                                ?>
+                                    <div  class="table-responsive">
+                                        <table style="font-size:90%" id="" class="table table-bordered table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <td rowspan="2"><center>#</center></td>
+                                                    <td rowspan="2"><center>Username</center></td>
+                                                    <td rowspan="2"><center>Users Email</center></td>
+                                                    <td rowspan="2"><center>Type of user</center></td>
+                                                    <td rowspan="2"><center>Time of Logging In</center></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <td colspan="5"><center> No data available in this table...</center></td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?php       
+                                    }
+                                ?>  
+                                                
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->                            
 
                         </section><!-- right col -->
+                        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                       
                     </div><!-- /.row (main row) -->
 
                 </section><!-- /.content -->
@@ -434,15 +463,15 @@ $email = $this->session->userdata('email');
         </div><!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
-        
-        
+
+   
+
 
 
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- jQuery UI 1.10.3 -->
         <script src="<?php echo base_url().'assets/js/jquery.js'?>" type="text/javascript"></script>
-        <script type="text/javascript" src = "<?php echo base_url().'assets/js/back.js'?>"></script>
         <!-- Bootstrap -->
         <script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js'?>" type="text/javascript"></script>
         <!-- Morris.js charts -->
@@ -473,6 +502,44 @@ $email = $this->session->userdata('email');
         <!-- Admin for demo purposes -->
         <script src="<?php echo base_url().'assets/js/admin/demo.js'?>" type="text/javascript"></script>
 
-        
+        <script type="text/javascript">
+        function add_instructor () {
+            $("#addinstructor").modal("show");
+        }
+
+      
+        }
+
+        function edit_instructor(id,fname,sname,institution,location,email,phone,status){
+
+            var str = "#tr_"+id;
+
+            var row = $(str).html();
+
+            $("#edit_table_details").html(row);
+
+            $("#editfacilityid").val(id);
+            $("#editfname").val(fname);
+            $("#editsname").val(sname);
+            $("#editinst").val(institution);
+            $("#editlocal").val(location);
+            $("#editemail").val(email);
+            $("#editphone").val(phone);
+                
+
+
+            $('input[name=editstatus][value=1]').prop('checked', false);
+            $('input[name=editstatus][value=2]').prop('checked', false);
+            
+
+            $('input[name=editstatus][value='+status+']').prop('checked', true);
+
+
+                
+            $("#instructordiv").modal("show");
+
+        }
+        </script>
+
     </body>
 </html>

@@ -4,6 +4,8 @@
 <title>Access Denied</title>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(). 'assets/Flat-UI/bootstrap/css/bootstrap.css'?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(). 'assets/Flat-UI/css/flat-ui.css'?>">
+<link href="<?php echo base_url() . 'assets/_include/css/main.css'?>" rel="stylesheet">
+
 <style type="text/css">
 	div#test
 	{
